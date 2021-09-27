@@ -42,7 +42,9 @@ folly::Future<Status> IndexScanExecutor::indexScan() {
                                       ictxs,
                                       lookup->isEdge(),
                                       lookup->schemaId(),
-                                      lookup->returnColumns())
+                                      lookup->returnColumns(),
+                                      lookup->orderBy(),
+                                      lookup->limit())
         .via(runner())
         .thenValue([this](StorageRpcResponse<LookupIndexResp> &&rpcResp) {
             return handleResp(std::move(rpcResp));

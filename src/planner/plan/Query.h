@@ -800,8 +800,8 @@ public:
     static TopN* make(QueryContext* qctx,
                       PlanNode* input,
                       std::vector<std::pair<size_t, OrderFactor::OrderType>> factors = {},
-                      int64_t offset = -1,
-                      int64_t count = -1) {
+                      int64_t offset = 0,
+                      int64_t count = 0) {
         return qctx->objPool()->add(new TopN(qctx, input, std::move(factors), offset, count));
     }
 

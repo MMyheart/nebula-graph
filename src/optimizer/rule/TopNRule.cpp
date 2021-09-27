@@ -48,9 +48,9 @@ StatusOr<OptRule::TransformResult> TopNRule::transform(OptContext *ctx,
 
     // Currently, we cannot know the total amount of input data,
     // so only apply topn rule when offset of limit is 0
-    if (limit->offset() != 0) {
-        return TransformResult::noTransform();
-    }
+    // if (limit->offset() != 0) {
+    //    return TransformResult::noTransform();
+    // }
 
     auto qctx = ctx->qctx();
     auto topn = TopN::make(qctx, nullptr, sort->factors(), limit->offset(), limit->count());

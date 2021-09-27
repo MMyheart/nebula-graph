@@ -252,11 +252,10 @@ Feature: Lookup tag index full scan
       | "Mavericks"     |
       | "Lakers"        |
     And the execution plan should be:
-      | id | name             | dependencies | operator info                                |
-      | 3  | Project          | 2            |                                              |
-      | 2  | Filter           | 4            | {"condition": "(team.name CONTAINS \"er\")"} |
-      | 4  | TagIndexFullScan | 0            |                                              |
-      | 0  | Start            |              |                                              |
+      | id | name             | dependencies | operator info                                                      |
+      | 3  | Project          | 4            |                                                                    |
+      | 4  | TagIndexFullScan | 0            | {"indexCtx": \"{\"condition\": \"(team.name CONTAINS \"er\")\"}\"} |
+      | 0  | Start            |              |                                                                    |
     When executing query:
       """
       LOOKUP ON team WHERE team.name CONTAINS "ABC"

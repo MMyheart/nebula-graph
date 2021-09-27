@@ -183,11 +183,10 @@ Feature: Lookup edge index full scan
       | "103"  | "101"  | 0       | "Blue"          |
       | "102"  | "103"  | 0       | "Yellow"        |
     And the execution plan should be:
-      | id | name              | dependencies | operator info                                     |
-      | 3  | Project           | 2            |                                                   |
-      | 2  | Filter            | 4            | {"condition": "(edge_1.col1_str CONTAINS \"l\")"} |
-      | 4  | EdgeIndexFullScan | 0            |                                                   |
-      | 0  | Start             |              |                                                   |
+      | id | name              | dependencies | operator info                                                   |
+      | 3  | Project           | 4            |                                                                 |
+      | 4  | EdgeIndexFullScan | 0            | {"indexCtx": "{\"filter": "(edge_1.col1_str CONTAINS \"l\")\"}" |
+      | 0  | Start             |              |                                                                 |
     When executing query:
       """
       LOOKUP ON edge_1 WHERE edge_1.col1_str CONTAINS "ABC" YIELD edge_1.col1_str
